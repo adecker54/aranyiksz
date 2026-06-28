@@ -1,2 +1,2 @@
 # aranyiksz
-A pénzügyek új generációja - az új szereplő az AurumX Hong Kong-ból
+A pénzügyek új generációja - az új szereplő az AurumX Hong Kong-ból. Nézd végig, vagy csak lapozz bele! Szerintem kedvet kapcs hozzá, hogy részese légy ennek a fejlődésnek, a pénzügyi forradalomnak. Ezt legkönnyebben úgy teheted meg, ha regisztrálsz és a Liquidity Vault feltöltésével tulajdonképpen kisrészvényes is leszel  cégben. Emellett szép jutalmat is kapsz, méghozzá óránként. Regisztrálj a jobb felső sarokban elvő linken!  
