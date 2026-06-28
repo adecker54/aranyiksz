@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AurumX Szimuláció</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+background:#111;
+color:#fff;
+padding:30px;
+
+}
+
+.wrapper{
+
+max-width:900px;
+margin:auto;
+
+}
+
+h1{
+
+text-align:center;
+margin-bottom:15px;
+color:#FFD54F;
+
+}
+
+.subtitle{
+
+text-align:center;
+color:#ddd;
+margin-bottom:40px;
+line-height:1.6;
+
+}
+
+.page{
+
+display:none;
+
+}
+
+.page.active{
+
+display:block;
+
+}
+
+.card{
+
+background:#1b1b1b;
+
+border:2px solid #FFD54F;
+
+border-radius:14px;
+
+padding:30px;
+
+margin-bottom:25px;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.card:hover{
+
+transform:scale(1.02);
+
+box-shadow:0 0 25px rgba(255,213,79,.35);
+
+}
+
+.card h2{
+
+text-align:center;
+
+color:#FFD54F;
+
+margin-bottom:15px;
+
+}
+
+.card p{
+
+text-align:center;
+
+line-height:1.6;
+
+}
+
+.backButton{
+
+display:inline-block;
+
+margin-bottom:25px;
+
+padding:12px 25px;
+
+background:#FFD54F;
+
+color:#111;
+
+font-weight:bold;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+.section{
+
+background:#1b1b1b;
+
+padding:30px;
+
+border-radius:14px;
+
+border:2px solid #FFD54F;
+
+}
+
+.field{
+
+margin-bottom:20px;
+
+}
+
+.field label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-weight:bold;
+
+color:#FFD54F;
+
+}
+
+.field input{
+
+width:100%;
+
+padding:12px;
+
+font-size:18px;
+
+border-radius:8px;
+
+border:none;
+
+}
+
+.buttonRow{
+
+display:flex;
+
+gap:15px;
+
+margin-top:30px;
+
+}
+
+.buttonRow button{
+
+flex:1;
+
+padding:14px;
+
+font-size:18px;
+
+background:#FFD54F;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+.result{
+
+margin-top:30px;
+
+padding:20px;
+
+background:#282828;
+
+border-left:6px solid #FFD54F;
+
+display:none;
+
+}
+
+.result h2{
+
+color:#FFD54F;
+
+margin-bottom:15px;
+
+}
+
+.big{
+
+font-size:42px;
+
+font-weight:bold;
+
+text-align:center;
+
+margin:20px 0;
+
+color:#FFD54F;
+
+}
+
+details{
+
+margin-top:30px;
+
+}
+
+summary{
+
+cursor:pointer;
+
+font-weight:bold;
+
+color:#FFD54F;
+
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+}
+
+th{
+
+background:#FFD54F;
+
+color:#111;
+
+padding:10px;
+
+}
+
+td{
+
+padding:8px;
+
+border:1px solid #444;
+
+text-align:right;
+
+}
+
+td:first-child,
+th:first-child{
+
+text-align:center;
+
+}
+
+.warning{
+
+margin-top:30px;
+
+font-style:italic;
+
+color:#ffb347;
+
+line-height:1.8;
+
+}
+
+.infoBox{
+
+background:#1b1b1b;
+
+border:2px solid #FFD54F;
+
+padding:35px;
+
+border-radius:14px;
+
+font-size:20px;
+
+line-height:2;
+
+text-align:center;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<h1>AurumX Szimuláció</h1>
+
+<!-- ================================================= -->
+<!-- NYITÓOLDAL -->
+<!-- ================================================= -->
+
+<div id="homePage" class="page active">
+
+<p class="subtitle">
+
+Ez a szimuláció megmutatja, hogy az AurumX Liquidity Vault rendszerben
+mennyi idő alatt érhető el egy kívánt passzív havi jövedelem,
+illetve mekkora kezdőtőkére van szükség annak eléréséhez.
+
+</p>
+
+<div class="card" onclick="showPage('calc1')">
+
+<h2>
+
+Hányadik hónaptól tudok
+kivenni egy adott
+fix havi jövedelmet?
+
+</h2>
+
+<p>
+
+Kattints ide a számításhoz.
+
+</p>
+
+</div>
+
+<div class="card" onclick="showPage('calc2')">
+
+<h2>
+
+Mennyi kezdőtőkére
+van szükségem
+egy adott fix havi
+jövedelem eléréséhez?
+
+</h2>
+
+<p>
+
+Kattints ide a számításhoz.
+
+</p>
+
+</div>
+
+<div class="card" onclick="showPage('infoPage')">
+
+<h2>
+
+INFÓ
+
+</h2>
+
+<p>
+
+Olvasd el, mielőtt cselekszel!
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- INFO -->
+<!-- ================================================= -->
+
+<div id="infoPage" class="page">
+
+<button class="backButton" onclick="showPage('homePage')">
+
+← Vissza a főmenübe
+
+</button>
+
+<div class="infoBox">
+
+<h2 style="margin-bottom:25px;color:#FFD54F;">
+Tájékoztatás
+</h2>
+
+<p>
+
+1/ A számolás az AurumX-ben jelenleg érvényes kamatos kamat alkalmazásával érvényes.<br> 
+2/ Ez a becsült % bármikor csökkenhet, amennyiben a cég elérte a Liquidity Vault eltervezett értékét. pl. 150.000.000 $-t.<br>
+3/ Százalék értéknek a 180 napos lekötésnél közölt 8%-15%, vagy a 360 napos lekötésnél közölt 15%-25% közötti értéket tanácsos beírni a reális helyzet megközelítése érdekében.<br>
+4/ Amennyiben a hozam automatikus lekötésre van állítva, a következő történik: Minden nap végén a rendszer 45 vagy 90 napra leköti a napi hozamot. A mai lekötött hozam 45/90 napig 'kamatozik' és csak utána lehet felvenni.<br>
+Ez mindaddig megy, amíg a kezdőtőke (csomag) automatikus lekötésre van állítva. Pl. a 12. napon a kamatos kamat jóváírást kikapcsolod. Ekkor 11 csomagod van és a legelső hozamot a kezdés után 101 nap múlva tudod kikérni.<br>
+5/ Ha nincs kamatos kamat, tehát mindennapos hozam lekötés, akkor a hozam bármikor kivehető. Persze akkor ez a számítás nem alkalmazható!!! 
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- KALKULÁTOR 1 -->
+<!-- ================================================= -->
+
+<div id="calc1" class="page">
+
+<button class="backButton" onclick="showPage('homePage')">
+
+← Vissza a főmenübe
+
+</button>
+
+<div class="section">
+
+<h2 style="text-align:center;color:#FFD54F;margin-bottom:30px;">
+
+Hányadik hónaptól tudok kivenni
+egy adott fix havi jövedelmet?
+
+</h2>
+
+<div class="field">
+
+<label>
+
+Kezdőtőke (USD)
+
+</label>
+
+<input
+type="number"
+id="startCapital"
+step="100"
+min="0"
+value="500">
+
+</div>
+
+<div class="field">
+
+<label>
+
+Havi kamat (%)
+
+</label>
+
+<input
+type="number"
+id="interestRate"
+step="0.01"
+value="10">
+
+</div>
+
+<div class="field">
+
+<label>
+
+Kívánt havi jövedelem (USD)
+
+</label>
+
+<input
+type="number"
+id="targetIncome"
+step="10"
+value="100">
+
+</div>
+
+<div class="buttonRow">
+
+<button onclick="calculateMonths()">
+
+Számítás
+
+</button>
+
+<button onclick="resetCalculator1()">
+
+Új számítás
+
+</button>
+
+</div>
+
+<div
+id="result1"
+class="result">
+
+<h2>
+
+Eredmény
+
+</h2>
+
+<div
+id="resultText1"
+class="big">
+
+</div>
+
+<p
+id="resultYearText1"
+style="text-align:center;font-size:20px;">
+
+</p>
+
+</div>
+
+<details>
+
+<summary>
+
+Részletes számítás
+
+</summary>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Hónap
+
+</th>
+
+<th>
+
+Nyitó tőke
+
+</th>
+
+<th>
+
+Havi kamat
+
+</th>
+
+<th>
+
+Záró tőke
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableBody1">
+
+</tbody>
+
+</table>
+
+</details>
+
+<div class="warning">
+
+Figyelem, ez egy szemléltetés, egy szimuláció!<br><br>
+
+A havi kamatok dinamikusan alakulnak,
+azaz <strong>NINCS</strong> garantált fix hozam!<br><br>
+
+A tényleges hozam mindig az AurumX ökoszisztéma aktuális teljesítményétől függ.
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================================================= -->
+<!-- KALKULÁTOR 2 -->
+<!-- ================================================= -->
+
+<div id="calc2" class="page">
+
+<button class="backButton" onclick="showPage('homePage')">
+
+← Vissza a főmenübe
+
+</button>
+
+<div class="section">
+
+<h2 style="text-align:center;color:#FFD54F;margin-bottom:30px;">
+
+Mennyi kezdőtőkére van szükségem
+egy adott fix havi jövedelem eléréséhez?
+
+</h2>
+
+<div class="field">
+
+<label>
+
+Havi kamat (%)
+
+</label>
+
+<input
+type="number"
+id="interestRate2"
+step="0.01"
+value="10">
+
+</div>
+
+<div class="field">
+
+<label>
+
+Kívánt havi jövedelem (USD)
+
+</label>
+
+<input
+type="number"
+id="targetIncome2"
+step="10"
+value="100">
+
+</div>
+
+<div class="field">
+
+<label>
+
+Hányadik hónapban szeretném elérni?
+
+</label>
+
+<input
+type="number"
+id="targetMonth"
+step="1"
+value="12">
+
+</div>
+
+<div class="buttonRow">
+
+<button onclick="calculateCapital()">
+
+Számítás
+
+</button>
+
+<button onclick="resetCalculator2()">
+
+Új számítás
+
+</button>
+
+</div>
+
+<div
+id="result2"
+class="result">
+
+<h2>
+
+Eredmény
+
+</h2>
+
+<div
+id="resultText2"
+class="big">
+
+</div>
+
+<p
+style="text-align:center;font-size:20px;">
+
+Szükséges kezdőtőke
+
+</p>
+
+</div>
+
+<details>
+
+<summary>
+
+Részletes számítás
+
+</summary>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Hónap
+
+</th>
+
+<th>
+
+Nyitó tőke
+
+</th>
+
+<th>
+
+Havi kamat
+
+</th>
+
+<th>
+
+Záró tőke
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tableBody2">
+
+</tbody>
+
+</table>
+
+</details>
+
+<div class="warning">
+
+Figyelem, ez egy szemléltetés, egy szimuláció!<br><br>
+
+A havi kamatok dinamikusan alakulnak,
+azaz <strong>NINCS</strong> garantált fix hozam!<br><br>
+
+A tényleges hozam mindig az AurumX ökoszisztéma aktuális teljesítményétől függ.
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function showPage(id){
+
+document.querySelectorAll(".page").forEach(page=>{
+
+page.classList.remove("active");
+
+});
+
+document.getElementById(id).classList.add("active");
+
+}
+
+function formatUsd(value){
+
+return Number(value).toLocaleString("en-US",{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+})+" USD";
+
+}
+
+/* =======================================================
+   1. KALKULÁTOR
+======================================================= */
+
+function calculateMonths(){
+
+let capital=parseFloat(document.getElementById("startCapital").value);
+
+let rate=parseFloat(document.getElementById("interestRate").value);
+
+let target=parseFloat(document.getElementById("targetIncome").value);
+
+if(capital<=0||rate<=0||target<=0){
+
+alert("Minden mezőt tölts ki!");
+
+return;
+
+}
+
+let monthlyRate=rate/100;
+
+let month=0;
+
+let table="";
+
+while(capital*monthlyRate<target && month<1200){
+
+let open=capital;
+
+let interest=open*monthlyRate;
+
+capital+=interest;
+
+month++;
+
+table+=`
+<tr>
+<td>${month}</td>
+<td>${formatUsd(open)}</td>
+<td>${formatUsd(interest)}</td>
+<td>${formatUsd(capital)}</td>
+</tr>`;
+
+}
+
+/* plusz egy sor */
+
+let open=capital;
+
+let interest=open*monthlyRate;
+
+let close=open+interest;
+
+table+=`
+<tr>
+<td>${month+1}</td>
+<td>${formatUsd(open)}</td>
+<td>${formatUsd(interest)}</td>
+<td>${formatUsd(close)}</td>
+</tr>`;
+
+document.getElementById("tableBody1").innerHTML=table;
+
+document.getElementById("result1").style.display="block";
+
+document.getElementById("resultText1").innerHTML=(month+1) + " hónap";
+
+document.getElementById("resultYearText1").innerHTML=
+"A kívánt havi jövedelem ekkor érhető el először.";
+
+}
+
+/* =======================================================
+   2. KALKULÁTOR
+======================================================= */
+function calculateCapital(){
+
+    let rate = parseFloat(document.getElementById("interestRate2").value);
+    let income = parseFloat(document.getElementById("targetIncome2").value);
+    let targetMonth = parseInt(document.getElementById("targetMonth").value);
+
+    if(rate<=0 || income<=0 || targetMonth<=0){
+        alert("Minden mezőt tölts ki!");
+        return;
+    }
+
+    const monthlyRate = rate / 100;
+
+    function reachesTarget(startCapital){
+
+        let balance = startCapital;
+
+        for(let i=1;i<targetMonth;i++){
+            balance += balance * monthlyRate;
+        }
+
+        return (balance * monthlyRate) >= income;
+
+    }
+
+    let low = 0;
+    let high = 100;
+
+    while(!reachesTarget(high)){
+        high *= 2;
+    }
+
+    while(high-low>1){
+
+        let mid = Math.floor((low+high)/2);
+
+        if(reachesTarget(mid)){
+            high = mid;
+        }else{
+            low = mid;
+        }
+
+    }
+
+    let exactCapital = high;
+
+    let roundedCapital = Math.ceil(exactCapital/100)*100;
+
+    let table = "";
+
+    let balance = roundedCapital;
+
+    for(let month=1;month<=targetMonth+1;month++){
+
+        let open = balance;
+        let interest = open * monthlyRate;
+        balance += interest;
+
+        table += `
+        <tr>
+            <td>${month}</td>
+            <td>${formatUsd(open)}</td>
+            <td>${formatUsd(interest)}</td>
+            <td>${formatUsd(balance)}</td>
+        </tr>`;
+
+    }
+
+    document.getElementById("tableBody2").innerHTML = table;
+
+    document.getElementById("result2").style.display = "block";
+
+    document.getElementById("resultText2").innerHTML =
+        formatUsd(roundedCapital);
+
+    document.querySelector("#result2 p").innerHTML =
+        "A számított érték: <b>"+formatUsd(exactCapital)+
+        "</b><br>" +
+        "100 USD-s lépcső miatt szükséges kezdőtőke:<br><b>"+
+        formatUsd(roundedCapital)+"</b>";
+
+}
+
+/* =======================================================
+   RESET
+======================================================= */
+
+function resetCalculator1(){
+
+document.getElementById("startCapital").value=500;
+
+document.getElementById("interestRate").value=10;
+
+document.getElementById("targetIncome").value=100;
+
+document.getElementById("tableBody1").innerHTML="";
+
+document.getElementById("result1").style.display="none";
+
+}
+
+function resetCalculator2(){
+
+document.getElementById("interestRate2").value=10;
+
+document.getElementById("targetIncome2").value=100;
+
+document.getElementById("targetMonth").value=12;
+
+document.getElementById("tableBody2").innerHTML="";
+
+document.getElementById("result2").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
