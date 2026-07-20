@@ -1,0 +1,220 @@
+        :root {
+            --primary: #d4af37; /* Arany */
+            --primary-hover: #aa8c2c;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #ffffff;
+            --text-gray: #b3b3b3;
+            --success: #2ecc71;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border: 1px solid #2a2a2a;
+        }
+
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-transform: none;
+            letter-spacing: 2px;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .input-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input, select {
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            background-color: var(--primary);
+            color: black;
+            border: none;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button:active {
+            transform: scale(0.99);
+        }
+
+        .result-box {
+            background-color: #252525;
+            border-left: 5px solid var(--success);
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 30px;
+            display: none;
+            text-align: center;
+        }
+
+        .result-text {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        .result-text strong {
+            color: var(--success);
+            font-size: 1.4rem;
+        }
+
+        .chart-container {
+            margin-top: 30px;
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            position: relative;
+            height: 350px;
+            width: 100%;
+            box-sizing: border-box;
+            display: none;
+        }
+
+        .toggle-btn {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            margin-top: 25px;
+            display: none;
+        }
+
+        .toggle-btn:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        .table-container {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            border: 1px solid #333;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #2d2d2d;
+            color: var(--primary);
+            position: sticky;
+            top: 0;
+            padding: 12px;
+            border-bottom: 2px solid #444;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #242424;
+        }
+
+	/* A Help ablak külső sötét, áttetsző háttere */
+	#helpModal {
+	    display: none; 
+	    position: fixed; 
+	    top: 0; 
+	    left: 0; 
+	    width: 100%; 
+	    height: 100%; 
+	    background: rgba(0, 0, 0, 0.75); 
+	    z-index: 9999; /* Nagyon magas érték, hogy minden felett legyen */
+	    overflow-y: auto;
+	}	
+
+	/* A Help ablak belső, széles, elegáns doboza */
+	#helpModal .modal-content {
+	    width: 90%;
+	    max-width: 1050px; /* Itt korlátozzuk le a maximális szélességet! */
+	    overflow-y: auto;      /* görgethetővé teszi függőlegesen -----------------------------------------*/
+            max-height: 80vh;      /* maximum a képernyő 80%-a magas legyen */
+            margin: 5% auto; /* Fentről 5% helyet hagy, és középre igazítja */
+	    background: #1a1a1a;
+	    padding: 30px;
+	    border-radius: 8px;
+	    color: #fff;
+	    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+	    box-sizing: border-box; /* Biztosítja, hogy a padding ne tolja túl a szélességet */
+	}
+
+	/* A bezáró gomb stílusa */
+	.help-close-btn {
+	    display: block;
+	    margin: 30px auto 10px auto;
+	    padding: 10px 30px;
+	    background-color: #d4af37; /* Arany */
+	    color: #000;
+	    font-weight: bold;
+	    border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s ease;
+        }
+
+	.help-close-btn:hover {
+	    background-color: #f1c40f;
+	}
